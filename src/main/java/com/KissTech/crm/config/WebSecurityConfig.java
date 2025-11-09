@@ -6,8 +6,6 @@ import com.KissTech.crm.jwt.JwtUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.instrument.classloading.LoadTimeWeaver;
-import org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,10 +39,10 @@ public class WebSecurityConfig {
         this.jwtUtils = jwtUtils;
         this.activeSessionService = activeSessionService;
     }
-    @Bean
-    public LoadTimeWeaver loadTimeWeaver() {
-        return new ReflectiveLoadTimeWeaver();
-    }
+//    @Bean
+//    public LoadTimeWeaver loadTimeWeaver() {
+//        return new ReflectiveLoadTimeWeaver();
+//    }
 
     // JWT Token Filter
     @Bean
@@ -62,6 +60,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
+        //jfj
     }
 
 
@@ -89,7 +88,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200/","http://localhost:4201/","https://kisstech.netlify.app/"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200/"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -110,9 +109,8 @@ public class WebSecurityConfig {
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(unauthorizedHandler))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-//                        .requestMatchers("/api/data/**").authenticated()
+                        .requestMatchers("/api/data/**").authenticated()
                         .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("kiss-tech/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
