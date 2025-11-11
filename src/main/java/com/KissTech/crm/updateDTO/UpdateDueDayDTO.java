@@ -12,4 +12,7 @@ public class UpdateDueDayDTO {
     private String status;
     private String createAt;
     private UUID id;
+
+    private String paymentType;
+    private String paymentDate;
 }

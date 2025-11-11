@@ -1,5 +1,8 @@
 package com.KissTech.crm.mapper;
 
+import com.KissTech.crm.DTO.StudentDashBoardDTO;
+import com.KissTech.crm.DTO.StudentNotificationAttendanceDTO;
+import com.KissTech.crm.DTO.StudentNotificationDueDayDTO;
 import com.KissTech.crm.model.StudentManagement;
 import com.KissTech.crm.createDTO.CreateStudentManagementDTO;
 import com.KissTech.crm.updateDTO.UpdateStudentManagementDTO;
@@ -151,6 +154,55 @@ public class StudentManagementMapper {
                     .map(attendanceMapper::modelToDTO)
                     .collect(Collectors.toList()));
         }
+
+        return dto;
+    }
+
+    public StudentNotificationDueDayDTO NotifyDueDay(StudentManagement model) {
+
+        StudentNotificationDueDayDTO dto = new StudentNotificationDueDayDTO();
+        dto.setFullName(model.getFullName());
+
+
+        // Map DueDay list
+        if (model.getDueDay() != null) {
+            dto.setDueDays(model.getDueDay().stream()
+                    .map(dueDayMapper::modelToDTO)
+                    .collect(Collectors.toList()));
+        }
+
+
+return dto;
+
+    }
+
+    public StudentNotificationAttendanceDTO NotifyAttendance(StudentManagement model) {
+
+
+        StudentNotificationAttendanceDTO dto = new StudentNotificationAttendanceDTO();
+        dto.setFullName(model.getFullName());
+
+
+        // Map DueDay list
+        if (model.getAttendance() != null) {
+            dto.setAttendance(model.getAttendance().stream()
+                    .map(attendanceMapper::modelToDTO)
+                    .collect(Collectors.toList()));
+        }
+
+
+        return dto;
+
+    }
+
+    public StudentDashBoardDTO DashBoard(StudentManagement model) {
+        StudentDashBoardDTO dto = new StudentDashBoardDTO();
+        dto.setFullName(model.getFullName());
+        dto.setCourse(model.getCourse());
+
+
+
+
 
         return dto;
     }

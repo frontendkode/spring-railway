@@ -1,14 +1,13 @@
 package com.KissTech.crm.mapper;
 
-import com.KissTech.crm.DTO.ActivityLogDTO;
-import com.KissTech.crm.DTO.ReminderLogDTO;
+import com.KissTech.crm.DTO.*;
 import com.KissTech.crm.model.ActivityLog;
 import com.KissTech.crm.model.LeadManagement;
 import com.KissTech.crm.model.ReminderLog;
-import com.KissTech.crm.DTO.LeadManagementDTO;
 import com.KissTech.crm.createDTO.CreateActivityLogDTO;
 import com.KissTech.crm.createDTO.CreateLeadManagementDTO;
 import com.KissTech.crm.createDTO.CreateReminderLogDTO;
+import com.KissTech.crm.model.StudentManagement;
 import com.KissTech.crm.updateDTO.UpdateActivityLogDTO;
 import com.KissTech.crm.updateDTO.UpdateCreateReminderLogDTO;
 import com.KissTech.crm.updateDTO.UpdateLeadManagementDTO;
@@ -212,6 +211,39 @@ public class LeadManagementMapper {
         reminder.setReminderTime(dto.getReminderTime());
         reminder.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : String.valueOf(LocalDateTime.now()));
         return reminder;
+    }
+
+
+    public LeadNotificationDTO NotifyDashBoard(LeadManagement lead) {
+
+        LeadNotificationDTO dto = new LeadNotificationDTO();
+
+        dto.setFullName(lead.getFullName());
+
+
+
+        // Map reminder logs
+        if (lead.getReminderLogs() != null) {
+            dto.setReminderLogs(
+                    lead.getReminderLogs().stream()
+                            .sorted(Comparator.comparing(ReminderLog::getCreatedAt)) // ascending
+
+                            .map(this::reminderLogEntityToDto)
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return dto;
+    }
+
+    public LeadDashBoardDTO DassBoard(LeadManagement lead) {
+
+        LeadDashBoardDTO dto = new LeadDashBoardDTO();
+
+        dto.setFullName(lead.getFullName());
+        dto.setSource(lead.getSource());
+        dto.setStage(lead.getStage());
+         return dto;
     }
 
 

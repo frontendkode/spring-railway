@@ -44,7 +44,7 @@ public class StudentManagementService {
     }
 
 
-    public String updatePaymentDetails(UUID dueDayId, String status, UUID studentId) {
+    public String updatePaymentDetails(UUID dueDayId, String status, UUID studentId,String paymentType,String date) {
         // Fetch due day entry
         DueDay data = dueDayRepository.findById(dueDayId)
                 .orElseThrow(() -> new RuntimeException("DueDay not found for ID: " + dueDayId));
