@@ -1,5 +1,6 @@
 package com.KissTech.crm.mapper;
 
+import com.KissTech.crm.DTO.TaskNotificationDTO;
 import com.KissTech.crm.createDTO.CreateTaskManagementDTO;
 import com.KissTech.crm.DTO.TaskManagementDTO;
 import com.KissTech.crm.model.StaffManagement;
@@ -80,5 +81,24 @@ public class TaskManagementMapper {
             StaffManagement staff = service.getById(dto.getStaffId());
             existingTask.setStaffManagement(staff);
         }
+    }
+
+    public TaskNotificationDTO NotifyDashBoard(TaskManagement model) {
+
+        TaskNotificationDTO dto = new TaskNotificationDTO();
+
+        dto.setTaskTitle(model.getTaskTitle());
+        dto.setPriority(model.getPriority());
+        dto.setStaffName(model.getStaffName());
+        dto.setDueDate(model.getDueDate());
+        dto.setStatus(model.getStatus());
+
+
+        if (model.getStaffManagement() != null) {
+            dto.setStaffName(model.getStaffName());
+
+        }
+
+        return dto;
     }
 }

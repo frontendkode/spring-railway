@@ -20,6 +20,8 @@ public class DueDayMapper {
         model.setDueDate(dto.getDueDate());
         model.setStatus(dto.getStatus());
         model.setCreateAt(String.valueOf(LocalDateTime.now()));
+        model.setPaymentDate(dto.getPaymentDate());
+        model.setPaymentType(dto.getPaymentType());
         return model;
     }
 
@@ -30,6 +32,9 @@ public class DueDayMapper {
         dto.setDueDate(model.getDueDate());
         dto.setStatus(model.getStatus());
         dto.setId(model.getId());
+
+        dto.setPaymentDate(model.getPaymentDate());
+        dto.setPaymentType(model.getPaymentType());
         if (model.getCreateAt() != null) {
      dto.setCreateAt(model.getCreateAt());
         }
@@ -45,6 +50,10 @@ public class DueDayMapper {
         model.setStatus(dto.getStatus());
         model.setCreateAt(String.valueOf(LocalDateTime.now()));
         model.setId(dto.getId());
+
+
+        model.setPaymentDate(dto.getPaymentDate());
+        model.setPaymentType(dto.getPaymentType());
         return model;
     }
 }

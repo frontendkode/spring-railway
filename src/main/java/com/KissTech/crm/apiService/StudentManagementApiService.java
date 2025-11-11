@@ -140,8 +140,8 @@ public class StudentManagementApiService {
         return studentManagementMapper.modelToDTO(updatedStudent);
     }
 
-    public String updatePaymentDetails(UUID dueDayId, String status,UUID id) {
-       return service.updatePaymentDetails(dueDayId,status,id);
+    public String updatePaymentDetails(UUID dueDayId, String status,UUID id,String paymentType,String date) {
+       return service.updatePaymentDetails(dueDayId,status,id,paymentType,date);
     }
 
     public String updateAttendanceDetails(UUID attendanceId, String status) {

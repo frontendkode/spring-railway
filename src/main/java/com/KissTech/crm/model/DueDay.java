@@ -14,5 +14,7 @@ public class DueDay extends AbstractEntity {
     private String dueDate;
     private String status;
     private String createAt;
+    private String paymentType;
+    private String paymentDate;
 
 }

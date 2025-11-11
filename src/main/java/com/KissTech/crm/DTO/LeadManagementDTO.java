@@ -10,14 +10,14 @@ import java.util.UUID;
 public class LeadManagementDTO {
 
     private UUID id;
-    private String fullName;
+    private String fullName;//
     private String phoneNumber;
     private String email;
     private String courseInterest;
     private String source;
     private String counselor;
     private String notes;
-    private String stage;
+    private String stage;//
     private String createdBy;
     private LocalDateTime createdAt;
     private List<ActivityLogDTO> activityLog;

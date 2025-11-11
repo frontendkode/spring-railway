@@ -202,9 +202,9 @@ public class StudentManagementController {
     @PostMapping("/updatePaymentDetails")
     public ResponseEntity<RestResponse<String>> updatePaymentDetails(
             @RequestParam UUID dueDayId,
-            @RequestParam String status,@RequestParam UUID studentId) {
+            @RequestParam String status,@RequestParam UUID studentId,@RequestParam String paymentType,@RequestParam String paymentDateAndTime) {
         try {
-            String message = service.updatePaymentDetails(dueDayId, status,studentId);
+            String message = service.updatePaymentDetails(dueDayId, status,studentId,paymentType,paymentDateAndTime);
 
             RestResponse<String> response = new RestResponse<>(
                     message,
